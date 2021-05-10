@@ -1,11 +1,13 @@
 from bs_scripts.bsCategoriesBooks import extract_categories_books as extract_categories_books
-
+from bs_scripts.bsBooksInCategorie import extractBooksFromCategorie as extractBooksFromCategorie
 def main() :
     categoriesBook = extract_categories_books()
     if isinstance(categoriesBook, dict) :
-        print(categoriesBook)
+        for categorie, urlCategorie in categoriesBook.items() :
+            urlBooksInCategorie = extractBooksFromCategorie(urlCategorie)
+            print("la Catégorie ", categorie, "contient ", len(urlBooksInCategorie), "livres")
     else :
-        print(categoriesBook)
+        print("Une erreur est survenue ou pb Internet")
     """
     PSEUDO CODE
     for categorie in categories :
