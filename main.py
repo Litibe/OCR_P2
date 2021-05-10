@@ -1,16 +1,13 @@
-# import beautifulsoup pour scapping page
-# import module creation fichier csv
-import os
-
-#import module depuis dossier bs_script
-
-#pseudo code pour le script final
+from bs_scripts.bsCategoriesBooks import extract_categories_books as extract_categories_books
 
 def main() :
+    categoriesBook = extract_categories_books()
+    if isinstance(categoriesBook, dict) :
+        print(categoriesBook)
+    else :
+        print(categoriesBook)
     """
-    url_site_to_scap = http://books.toscrape.com/
-
-    categories = extractCategoriesFromUrl()
+    PSEUDO CODE
     for categorie in categories :
         extractUrlProductsFromCategorie()
         for urlproduct in urlProducts :
