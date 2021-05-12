@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-def extract_categories_books() :
-    url = "http://books.toscrape.com/"
-    try :
-        response = requests.get(url)
-    except :
+
+def extract_categories_books(Website):
+    try:
+        response = requests.get(Website)
+    except:
         pb = "Un problème de connexion est survenue, pas de code Réponse 200"
         return pb
     if response.ok:
@@ -16,7 +16,7 @@ def extract_categories_books() :
         liInAside = soup.aside.li.a.find_next().findAll("li")
         for element in liInAside:
             a = element.find("a")
-            link = url + a["href"]
+            link = Website + a["href"]
 
             # extraction du nom de la catégorie
             for content in a.contents:
