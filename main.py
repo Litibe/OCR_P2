@@ -29,7 +29,7 @@ def main(WEBSITE):
     # extraction des catégories de livres
     categories_book = extract_categories_books(WEBSITE)
     if isinstance(categories_book, dict):
-
+        i = 1
         for category, url_categorie in categories_book.items():
             # creation fichier au nom de la catégorie
             fichier_csv = os.path.join(dossier_fichiers_csv, (str(category) + ".csv"))
@@ -43,14 +43,16 @@ def main(WEBSITE):
             url_books_in_categorie = extract_books_from_categorie(url_categorie)
             print("\n la Catégorie", category, "contient", len(url_books_in_categorie), "livres")
             print(url_categorie)
+
+
             #creation dossier au nom de la categorie dans dossier IMG
             dossier_category = os.path.join(dossier_img_categories, category)
             os.makedirs(dossier_category)
 
             # extraction info d'un livre issue d'une catégorie
-            i=1
+
             for product_page_url in url_books_in_categorie:
-                print("extraction", i, "sur", len(url_books_in_categorie))
+
                 product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax,\
                 number_available, product_description, category, review_rating,\
                 image_url = extract_info_book(WEBSITE, product_page_url, category)
@@ -63,6 +65,8 @@ def main(WEBSITE):
 
                 # enregistrement fichier img dans dossier :
                 urllib.request.urlretrieve(image_url, dossier_category+"/"+universal_product_code+".jpg")
+
+                print("Etat de l'extraction : ", str(round(i * 100 / 1051, 1)) + "%")
                 i+=1
         print("fin du programme")
 
