@@ -1,3 +1,6 @@
+# coding: utf-8
+
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -9,7 +12,7 @@ def extract_categories_books(Website):
         pb = "Un problème de connexion est survenue, pas de code Réponse 200"
         return pb
     if response.ok:
-        soup = BeautifulSoup(response.text, 'lxml')
+        soup = BeautifulSoup(response.content, 'html.parser')
         categoriesBook = {}
         # extraction des "li" présent dans la 2e div de l'aside
         # sinon extrait que le lien Book

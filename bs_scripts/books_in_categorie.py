@@ -1,3 +1,6 @@
+# coding: utf-8
+
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -8,7 +11,7 @@ def extract_books_from_list_page(url):
     response = requests.get(url)
     if response.ok:
         books = []
-        soup = BeautifulSoup(response.text, 'lxml')
+        soup = BeautifulSoup(response.content, 'html.parser')
         # extraction des livres présent dans <section> puis dans 2e div, puis dans <ol>
         liste_books = soup.section.ol.findAll("li")
         for book in liste_books:
