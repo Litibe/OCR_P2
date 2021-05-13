@@ -17,13 +17,15 @@ def extract_books_from_list_page(url):
             books.append(url_website_catalogue + a["href"].strip("../../.."))
 
         # recherche dans la page si bouton Next avec modification de l'url de la futur page à scrapper
-        next = soup.select(".next a ")
+        link_next = soup.select(".next a ")
         # si pas de lien Next, renvoi une liste vide
         try:
-            url = ("/".join(url.split("/")[:-1]) + "/") + next.split('"')[1]
-        except :
+            url = ("/".join(url.split("/")[:-1]) + "/") + str(link_next).split('"')[1]
+        except AttributeError :
             pass
-        return books, next, url
+        except IndexError :
+            pass
+        return books, link_next, url
 
 
 def extract_books_from_categorie(url):
@@ -33,3 +35,6 @@ def extract_books_from_categorie(url):
         books, link_next, url = extract_books_from_list_page(url)
         url_books.extend(books)
     return (url_books)
+
+if __name__ == "__main__" :
+    extract_books_from_categorie("http://books.toscrape.com/catalogue/category/books/mystery_3/index.html")
