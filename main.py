@@ -62,7 +62,7 @@ def main(WEBSITE):
                                      review_rating, image_url])
 
                 # enregistrement fichier img dans dossier :
-                urllib.request.urlretrieve(image_url, dossier_category+"/"+title+".jpg")
+                urllib.request.urlretrieve(image_url, dossier_category+"/"+universal_product_code+".jpg")
                 i+=1
         print("fin du programme")
 
