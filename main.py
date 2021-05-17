@@ -30,6 +30,7 @@ def main(WEBSITE):
     categories_book = extract_categories_books(WEBSITE)
     if isinstance(categories_book, dict):
         i = 1
+
         for category, url_categorie in categories_book.items():
             # creation fichier au nom de la catégorie
             fichier_csv = os.path.join(dossier_fichiers_csv, (str(category) + ".csv"))
@@ -41,7 +42,7 @@ def main(WEBSITE):
 
             # extraction des url des livres présents dans chaque catégorie
             url_books_in_categorie = extract_books_from_categorie(url_categorie)
-            print("\n la Catégorie", category, "contient", len(url_books_in_categorie), "livres")
+            print("\n La Catégorie", category, "contient", len(url_books_in_categorie), "livres")
             print(url_categorie)
 
 
@@ -66,7 +67,7 @@ def main(WEBSITE):
                 # enregistrement fichier img dans dossier :
                 urllib.request.urlretrieve(image_url, dossier_category+"/"+universal_product_code+".jpg")
 
-                print("Etat de l'extraction : ", str(round(i * 100 / 1051, 1)) + "%")
+                print("Etat de l'extraction : ", str(round(i /10, 1)) + "%")
                 i+=1
         print("fin du programme")
 
@@ -76,6 +77,7 @@ def main(WEBSITE):
 
 
 if __name__ == "__main__":
+    print("Lancement du script scraping pour " + WEBSITE)
     main(WEBSITE)
 else:
     print("Merci d'exécuter le fichier main.py directement")

@@ -20,9 +20,9 @@ def extract_info_book(Website, product_page_url, category):
             if tr.find("th").text == "UPC":
                 universal_product_code = tr.find("td").text
             if tr.find("th").text == "Price (excl. tax)":
-                price_excluding_tax = tr.find("td").text
+                price_excluding_tax = "£" + str((tr.find("td").text).split("£")[1])
             if tr.find("th").text == "Price (incl. tax)":
-                price_including_tax = tr.find("td").text
+                price_including_tax =  "£" + str((tr.find("td").text).split("£")[1])
             if tr.find("th").text == "Availability":
                 number_available = ""
                 available = tr.find("td").text
@@ -67,3 +67,6 @@ if __name__ == "__main__" :
     product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, \
     product_description, category, review_rating, image_url = extract_info_book(Website,
     "http://books.toscrape.com/catalogue/sharp-objects_997/index.html", "categor")
+
+    print(product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, \
+    product_description, category, review_rating, image_url)
