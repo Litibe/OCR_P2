@@ -20,7 +20,7 @@ All the books in a category will be saved in a summary CSV file, in the name of 
 and in a separate folder will be saved a copy of the book cover (jpg format) noted under its code UPC.jpg
 
 ***
-## Installation virtual environment in terminal
+## Installation virtual environment in terminal MAC (for windows replace env/bin/ by env/Script/)
 <br/>
 $ python3 -m venv env <br/>
 $ source env/bin/activate <br/>
