@@ -77,7 +77,7 @@ def main(WEBSITE):
 
 
 if __name__ == "__main__":
-    print("Lancement du script scraping pour " + WEBSITE)
+    print("Lancement du script scraping pour " + WEBSITE + "\n")
     main(WEBSITE)
 else:
     print("Merci d'exécuter le fichier main.py directement")
