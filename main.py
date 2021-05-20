@@ -1,7 +1,5 @@
-import csv
 import os
 import shutil
-
 
 from scripts_for_BeautifulSoup.categories_books import extract_categories_books
 from scripts_for_BeautifulSoup.books_from_category import extract_books_from_category
@@ -67,7 +65,7 @@ def extract_all(WEBSITE,launch_csv, launch_img):
             print("Etat de l'extraction : ", str(round(i / 49*100, 1)) + "%")
             i += 1
 
-        print("fin du programme")
+        print("fin du programme et compression en ZIP des extractions")
 
 
     else:
@@ -116,7 +114,7 @@ def main() :
             22 => Extraction Livres d'une catégories + Tableau CSV 
             23 => Extraction Livres d'une catégories + Dossier JPG
             
-            0 => Sortie du programme
+            0 => Sortie du programme et compression en ZIP des extractions
         """)
 
         action = (input("Que souhaitez vous faire : "))
