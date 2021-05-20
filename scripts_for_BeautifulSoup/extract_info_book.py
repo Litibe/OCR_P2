@@ -2,10 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def extract_info_book(Website, product_page_url, category):
+def extract_info_book(Website, product_page_url):
     response = requests.get(product_page_url)
     if response.ok:
         soup = BeautifulSoup(response.content, 'html.parser')
+
+        # extract category
+        category = soup.find("ul", attrs={"class": "breadcrumb"})
+        category = category.find_all("a")
+        category = category[2].text
 
         # extract img
         extract_img = soup.article.find("img")
@@ -51,8 +56,8 @@ def extract_info_book(Website, product_page_url, category):
 if __name__ == "__main__" :
     Website = "http://books.toscrape.com/"
     # exemple url livre : "http://books.toscrape.com/catalogue/sharp-objects_997/index.html"
-    input_url = str(input("Merci de saisir l'url du livre dont vous souhaitez extraire les informations : "))
-    product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, product_description, category, review_rating, image_url = extract_info_book(Website,input_url, "category")
+    #input_url = str(input("Merci de saisir l'url du livre dont vous souhaitez extraire les informations : "))
+    product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, product_description, category, review_rating, image_url = extract_info_book(Website,"http://books.toscrape.com/catalogue/sharp-objects_997/index.html")
     print("\nproduct_page_url : " + product_page_url)
     print("universal_product_code : " + universal_product_code)
     print("title : " + title)
@@ -61,4 +66,5 @@ if __name__ == "__main__" :
     print("product_description : \n" + product_description)
     print("review_rating : " + str(review_rating))
     print("image_url : " + image_url)
+    print("category = " + str(category))
 

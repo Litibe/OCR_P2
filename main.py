@@ -1,11 +1,13 @@
 import csv
 import os
 import shutil
-import urllib.request
+
 
 from scripts_for_BeautifulSoup.categories_books import extract_categories_books
 from scripts_for_BeautifulSoup.books_from_category import extract_books_from_category
 from scripts_for_BeautifulSoup.extract_info_book import extract_info_book
+from scripts_for_csv.save_in_csv import save_in_csv_file
+from script_save_img.save_img import save_img_in_folder
 
 WEBSITE = "http://books.toscrape.com/"
 
@@ -25,8 +27,19 @@ def reset_folders():
     os.makedirs(files_csv_folder)
     os.makedirs(img_by_categories_folder)
 
+def extract_book_from_category_to_create_csv(url_books_in_category) :
+    data_to_write_for_csv = []
+    for product_page_url in url_books_in_category:
+        product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, \
+        number_available, product_description, category, review_rating, \
+        image_url = extract_info_book(WEBSITE, product_page_url)
+        print("La catégorie contient : " + title + " " + product_page_url)
+        data_to_write_for_csv.append([product_page_url, universal_product_code, title, price_including_tax,
+                                      price_excluding_tax, number_available, product_description, category,
+                                      review_rating, image_url])
+        return img_by_categories_folder, title, product_page_url, category, image_url, universal_product_code, data_to_write_for_csv
 
-def extract_all(WEBSITE):
+def extract_all(WEBSITE,launch_csv, launch_img):
     # extraction des catégories de livres
     categories_book = extract_categories_books(WEBSITE)
     if isinstance(categories_book, dict):
@@ -40,42 +53,40 @@ def extract_all(WEBSITE):
             print("\n La Catégorie", category, "contient", len(url_books_in_category), "livres")
             print(url_category)
 
-
-
             # extraction info d'un livre issue d'une catégorie
-            data_to_write_for_csv = []
-            for product_page_url in url_books_in_category:
-                product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, \
-                number_available, product_description, category, review_rating, \
-                image_url = extract_info_book(WEBSITE, product_page_url, category)
-                data_to_write_for_csv.append([product_page_url, universal_product_code, title, price_including_tax,
-                                              price_excluding_tax, number_available, product_description, category,
-                                              review_rating, image_url])
+            img_by_categories_folder, title, product_page_url, category, image_url, universal_product_code, \
+            data_to_write_for_csv = extract_book_from_category_to_create_csv(url_books_in_category)
 
-                # enregistrement fichier img dans dossier :
-                # creation dossier au nom de la categorie dans dossier IMG
-                category_folder = os.path.join(img_by_categories_folder, category)
-                os.makedirs(category_folder)
-                urllib.request.urlretrieve(image_url, category_folder + "/" + universal_product_code + ".jpg")
+            if launch_img == True :
+                save_img_in_folder(img_by_categories_folder, category, image_url, universal_product_code)
 
-                print("Etat de l'extraction : ", str(round(i / 10, 1)) + "%")
-                i += 1
+            if launch_csv == True :
+                save_in_csv_file(files_csv_folder, category, data_to_write_for_csv)
 
-            # creation fichier au nom de la catégorie
-            file_csv = os.path.join(files_csv_folder, (str(category) + ".csv"))
-            with open(file_csv, "w", newline='', encoding="utf-8") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow(["product_page_url", "universal_product_code", "title", "price_including_tax",
-                                 "price_excluding_tax", "number_available", "product_description", "category",
-                                 "review_rating", "image_url"])
-                for book in data_to_write_for_csv:
-                    writer.writerow(book)
+            print("Etat de l'extraction : ", str(round(i / 10, 1)) + "%")
+            i += 1
+
         print("fin du programme")
 
 
     else:
         print("Une erreur est survenue ou pb Internet")
 
+def extract(url_books_in_category,launch_csv, launch_img ) :
+
+    # extraction des url des livres présents dans chaque catégorie
+    url_books_in_category = extract_books_from_category(url_books_in_category)
+    print("\n La Catégorie contient", len(url_books_in_category), "livres")
+
+    img_by_categories_folder, title, product_page_url, category, image_url, universal_product_code, \
+    data_to_write_for_csv = extract_book_from_category_to_create_csv(url_books_in_category)
+
+    if launch_img == True:
+        save_img_in_folder(img_by_categories_folder, category, image_url, universal_product_code)
+
+    if launch_csv == True:
+        save_in_csv_file(files_csv_folder, category, data_to_write_for_csv)
+    print("Fin de l'extraction")
 
 def main() :
     run = True
@@ -86,13 +97,9 @@ def main() :
             12 => Extraction de tous les livres de toutes les catégories + Tableaux CSV 
             13 => Extraction de tous les livres de toutes les catégories + Dossier JPG 
             
-            21 => Extraction Livres d'une URL de catégories précises + Tableau CSV + Dossier JPG
-            22 => Extraction Livres d'une URL de catégories précises + Tableau CSV 
-            23 => Extraction Livres d'une URL de catégories précises + Dossier JPG
-    
-            31 => Extraction Informations d'un Livre précis + Tableau CSV + Dossier JPG
-            32 => Extraction Informations d'un Livre précis + Tableau CSV
-            33 => Extraction Informations d'un Livre précis + Dossier JPG
+            21 => Extraction Livres d'une catégories + Tableau CSV + Dossier JPG
+            22 => Extraction Livres d'une catégories + Tableau CSV 
+            23 => Extraction Livres d'une catégories + Dossier JPG
             
             0 => Sortie du programme
         """)
@@ -104,10 +111,36 @@ def main() :
             print(f"Merci de saisir un nombre - erreur : {e}")
 
         if action == 11 :
-            extract_all(WEBSITE)
+            extract_all(WEBSITE, launch_csv=True, launch_img=True)
             run = True
+        elif action == 12 :
+            extract_all(WEBSITE, launch_csv=True, launch_img=False)
+            run = True
+        elif action == 13 :
+            extract_all(WEBSITE, launch_csv=False, launch_img=False)
+            run = True
+
+        elif action == 21 :
+            categoriesBook = extract_categories_books(WEBSITE)
+            i=0
+            choix_categories_liste = []
+            for category in categoriesBook :
+                print("Voici la liste des Catégories de Livres : ")
+                print("\t choix n°" + str(i) + " pour " + category)
+                choix_categories_liste.append(category)
+                i += 1
+            try :
+                choix = int(input("Taper votre N° de Catégorie à traiter svp : "))
+            except ValueError :
+                print("Merci de taper un nombre")
+            url_category = (categoriesBook.get(choix_categories_liste[choix], ""))
+            extract(url_category, launch_csv=True, launch_img=True)
+            run = True
+
         elif action == 0 :
             run = False
+        else :
+            run = True
 
     print("Fin du programme")
 
