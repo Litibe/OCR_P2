@@ -27,17 +27,20 @@ def reset_folders():
     os.makedirs(files_csv_folder)
     os.makedirs(img_by_categories_folder)
 
-def extract_book_from_category_to_create_csv(url_books_in_category) :
+def extract_book_from_category_to_create_csv(url_books_in_category, launch_img) :
     data_to_write_for_csv = []
     for product_page_url in url_books_in_category:
         product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, \
         number_available, product_description, category, review_rating, \
         image_url = extract_info_book(WEBSITE, product_page_url)
         print("La catégorie contient : " + title + " " + product_page_url)
+        if launch_img == True:
+            save_img_in_folder(img_by_categories_folder, category, image_url, universal_product_code)
+
         data_to_write_for_csv.append([product_page_url, universal_product_code, title, price_including_tax,
                                       price_excluding_tax, number_available, product_description, category,
                                       review_rating, image_url])
-        return img_by_categories_folder, title, product_page_url, category, image_url, universal_product_code, data_to_write_for_csv
+    return img_by_categories_folder, title, product_page_url, category, image_url, universal_product_code, data_to_write_for_csv
 
 def extract_all(WEBSITE,launch_csv, launch_img):
     # extraction des catégories de livres
@@ -55,15 +58,13 @@ def extract_all(WEBSITE,launch_csv, launch_img):
 
             # extraction info d'un livre issue d'une catégorie
             img_by_categories_folder, title, product_page_url, category, image_url, universal_product_code, \
-            data_to_write_for_csv = extract_book_from_category_to_create_csv(url_books_in_category)
+            data_to_write_for_csv = extract_book_from_category_to_create_csv(url_books_in_category, launch_img)
 
-            if launch_img == True :
-                save_img_in_folder(img_by_categories_folder, category, image_url, universal_product_code)
 
             if launch_csv == True :
                 save_in_csv_file(files_csv_folder, category, data_to_write_for_csv)
 
-            print("Etat de l'extraction : ", str(round(i / 10, 1)) + "%")
+            print("Etat de l'extraction : ", str(round(i / 49*100, 1)) + "%")
             i += 1
 
         print("fin du programme")
@@ -79,14 +80,28 @@ def extract(url_books_in_category,launch_csv, launch_img ) :
     print("\n La Catégorie contient", len(url_books_in_category), "livres")
 
     img_by_categories_folder, title, product_page_url, category, image_url, universal_product_code, \
-    data_to_write_for_csv = extract_book_from_category_to_create_csv(url_books_in_category)
-
-    if launch_img == True:
-        save_img_in_folder(img_by_categories_folder, category, image_url, universal_product_code)
+    data_to_write_for_csv = extract_book_from_category_to_create_csv(url_books_in_category, launch_img)
 
     if launch_csv == True:
         save_in_csv_file(files_csv_folder, category, data_to_write_for_csv)
     print("Fin de l'extraction")
+
+def summary_choice2X_extract_books_from_category():
+    categoriesBook = extract_categories_books(WEBSITE)
+    i = 0
+    choix_categories_liste = []
+    print("Voici la liste des Catégories de Livres : ")
+    for category in categoriesBook:
+        print("\t choix n°" + str(i) + " pour " + category)
+        choix_categories_liste.append(category)
+        i += 1
+    try:
+        choix = int(input("Taper votre N° de Catégorie à traiter svp : "))
+    except ValueError:
+        print("Merci de taper un nombre")
+    print("Vous avez choisi : " + str(choix_categories_liste[choix]))
+    url_category = (categoriesBook.get(choix_categories_liste[choix], ""))
+    return url_category
 
 def main() :
     run = True
@@ -117,26 +132,21 @@ def main() :
             extract_all(WEBSITE, launch_csv=True, launch_img=False)
             run = True
         elif action == 13 :
-            extract_all(WEBSITE, launch_csv=False, launch_img=False)
+            extract_all(WEBSITE, launch_csv=False, launch_img=True)
             run = True
 
         elif action == 21 :
-            categoriesBook = extract_categories_books(WEBSITE)
-            i=0
-            choix_categories_liste = []
-            for category in categoriesBook :
-                print("Voici la liste des Catégories de Livres : ")
-                print("\t choix n°" + str(i) + " pour " + category)
-                choix_categories_liste.append(category)
-                i += 1
-            try :
-                choix = int(input("Taper votre N° de Catégorie à traiter svp : "))
-            except ValueError :
-                print("Merci de taper un nombre")
-            url_category = (categoriesBook.get(choix_categories_liste[choix], ""))
+            url_category = summary_choice2X_extract_books_from_category()
             extract(url_category, launch_csv=True, launch_img=True)
             run = True
-
+        elif action == 22 :
+            url_category = summary_choice2X_extract_books_from_category()
+            extract(url_category, launch_csv=True, launch_img=False)
+            run = True
+        elif action == 23 :
+            url_category = summary_choice2X_extract_books_from_category()
+            extract(url_category, launch_csv=False, launch_img=True)
+            run = True
         elif action == 0 :
             run = False
         else :
