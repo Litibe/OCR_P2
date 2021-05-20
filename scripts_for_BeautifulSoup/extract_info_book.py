@@ -1,5 +1,3 @@
-# coding: utf-8
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -31,7 +29,8 @@ def extract_info_book(Website, product_page_url, category):
                         # extraction des chiffres dans la quantité  : In stock (20 available)
                         if int(element) in range(0, 10):
                             number_available += str(element)
-                    except ValueError:
+                    except ValueError :
+                        # on a pas besoin d'afficher l'erreur, si en stock extraction chiffre sinon ZERO
                         pass
                 try:
                     number_available = int(number_available)
@@ -45,28 +44,21 @@ def extract_info_book(Website, product_page_url, category):
         review_rating = soup.article.find("p", attrs={"class": "star-rating"})
         review_rating = review_rating["class"][1]
 
-        """
-            product_page_url
-            universal_product_code
-            title
-            price_including_tax
-            price_excluding_tax
-            number_available
-            product_description
-        category
-            review_rating
-            image_url
-        """
         return product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax,\
                number_available, product_description, category, review_rating, image_url
 
 
 if __name__ == "__main__" :
     Website = "http://books.toscrape.com/"
+    # exemple url livre : "http://books.toscrape.com/catalogue/sharp-objects_997/index.html"
+    input_url = str(input("Merci de saisir l'url du livre dont vous souhaitez extraire les informations : "))
+    product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, product_description, category, review_rating, image_url = extract_info_book(Website,input_url, "category")
+    print("\nproduct_page_url : " + product_page_url)
+    print("universal_product_code : " + universal_product_code)
+    print("title : " + title)
+    print("price_including_tax : " + price_including_tax + " et " + "price_excluding_tax : " + price_excluding_tax)
+    print("number_available : " + str(number_available))
+    print("product_description : \n" + product_description)
+    print("review_rating : " + str(review_rating))
+    print("image_url : " + image_url)
 
-    product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, \
-    product_description, category, review_rating, image_url = extract_info_book(Website,
-    "http://books.toscrape.com/catalogue/sharp-objects_997/index.html", "categor")
-
-    print(product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, \
-    product_description, category, review_rating, image_url)

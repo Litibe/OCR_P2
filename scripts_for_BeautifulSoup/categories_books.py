@@ -1,6 +1,3 @@
-# coding: utf-8
-
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -23,9 +20,6 @@ def extract_categories_books(Website):
 
             # extraction du nom de la catégorie
             for content in a.contents:
-                """ Modification String title car sinon : 
-                '\n                            \n                                Health\n                            \n                        '
-                """
                 title = content.split("\n")
                 title = title[2].strip("  ")
             categoriesBook[title] = link

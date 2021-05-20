@@ -1,6 +1,3 @@
-# coding: utf-8
-
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -24,14 +21,13 @@ def extract_books_from_list_page(url):
         # si pas de lien Next, renvoi une liste vide
         try:
             url = ("/".join(url.split("/")[:-1]) + "/") + str(link_next).split('"')[1]
-        except AttributeError :
-            pass
         except IndexError :
+            # si pas d'autres pages à inspecter, pas besoin d'afficher l'erreur
             pass
         return books, link_next, url
 
 
-def extract_books_from_categorie(url):
+def extract_books_from_category(url):
     url_books = []
     link_next = ["Next"]
     while len(link_next) > 0:  # si bouton next trouvé dans page, on refait scrapping de la nouvelle page sinon arret
@@ -39,5 +35,8 @@ def extract_books_from_categorie(url):
         url_books.extend(books)
     return (url_books)
 
+
+
 if __name__ == "__main__" :
-    extract_books_from_categorie("http://books.toscrape.com/catalogue/category/books/mystery_3/index.html")
+    url_books = extract_books_from_category("http://books.toscrape.com/catalogue/category/books/mystery_3/index.html")
+    print(url_books)
