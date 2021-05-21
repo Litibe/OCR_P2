@@ -46,12 +46,13 @@ Exécution du Programme via le fichier principal : main.py<br/>
 
         $ python3 main.py 
 
-### Pour windows replacer [nom_de_votre_environnement_virtuel]/bin/ PAR  [nom_de_votre_environnement_virtuel]\Scripts\activate)
+### Pour windows replacer [nom_de_votre_environnement_virtuel]/bin/activate PAR  [nom_de_votre_environnement_virtuel]\Scripts\activate)
 
 ***
 ## Lancement du programme : 
 Le programme d'un interface dans le terminal pour laisser à l'utilisateur le choix dans son extraction : <br/>
-"""
+
+        
         Lancement du script scraping pour http://books.toscrape.com/
 
         Sommaire : 
@@ -66,7 +67,7 @@ Le programme d'un interface dans le terminal pour laisser à l'utilisateur le ch
             0 => Sortie du programme
         
         Que souhaitez vous faire : 
-"""
+
  <br/>
 Le programme laisse le choix à l'utilisateur, d'extraire tout ou une partie des livres présents dans une catégorie, depuis le site. <br/>
 Lors de l'extraction, le programme affiche quel livre il est en train de traiter ainsi que son adresse URL pour un accès rapide. <br/>
