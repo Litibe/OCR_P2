@@ -93,12 +93,20 @@ def summary_choice2X_extract_books_from_category():
         print("\t choix n°" + str(i) + " pour " + category)
         choix_categories_liste.append(category)
         i += 1
-    try:
-        choix = int(input("Taper votre N° de Catégorie à traiter svp : "))
-    except ValueError:
-        print("Merci de taper un nombre")
-    print("Vous avez choisi : " + str(choix_categories_liste[choix]))
-    url_category = (categoriesBook.get(choix_categories_liste[choix], ""))
+    validation = False
+    while validation == False :
+        choix = input("Taper votre N° de Catégorie à traiter svp : ")
+        try :
+            if int(choix) < len(choix_categories_liste):
+                validation = True
+            else :
+                print("Merci de saisir un chiffre compris dans la liste ci-dessus")
+        except :
+            print("Merci de saisir un chiffre valide svp")
+
+
+    print("Vous avez choisi : " + str(choix_categories_liste[int(choix)]))
+    url_category = (categoriesBook.get(choix_categories_liste[int(choix)], ""))
     return url_category
 
 def main() :
