@@ -65,7 +65,7 @@ def extract_all(WEBSITE,launch_csv, launch_img):
             print("Etat de l'extraction : ", str(round(i / 49*100, 1)) + "%")
             i += 1
 
-        print("fin du programme et compression en ZIP des extractions")
+        print("fin du programme")
 
 
     else:
@@ -114,7 +114,7 @@ def main() :
             22 => Extraction Livres d'une catégories + Tableau CSV 
             23 => Extraction Livres d'une catégories + Dossier JPG
             
-            0 => Sortie du programme et compression en ZIP des extractions
+            0 => Sortie du programme
         """)
 
         action = (input("Que souhaitez vous faire : "))
