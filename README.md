@@ -22,18 +22,29 @@ image_url <br/>
 ## Installation d'un environnement virtuel ainsi que les dépendances associées pour l'exécution du programme :  
 <br/>
 ### MAC
-création de l'environnement virtuel
-$ python3 -m venv [nom_de_votre_environnement_virtuel] <br/>
-activation de l'environnement virtuel
-$ source [nom_de_votre_environnement_virtuel]/bin/activate <br/>
-récupération des fichiers sources du script depuis dépot GitHub
-$ git clone https://github.com/Litibe/OCR_P2.git <br/>
-Aller dans le dossier OCR_P2 contenant les fichiers
-$ cd OCR_P2 <br/>
-Installation des packages nécessaires (requests, lxml, BeautifulSoup4 = bs4)
-$ pip install -r requirements.txt <br/>
-Exécution du Programme via le fichier principal : main.py
-$ python3 main.py <br/>
+création de l'environnement virtuel<br/>
+
+        $ python3 -m venv [nom_de_votre_environnement_virtuel] 
+
+activation de l'environnement virtuel <br/>
+
+        $ source [nom_de_votre_environnement_virtuel]/bin/activate
+        
+récupération des fichiers sources du script depuis dépot GitHub<br/>
+
+        $ git clone https://github.com/Litibe/OCR_P2.git
+
+Aller dans le dossier OCR_P2 contenant les fichiers<br/>
+
+        $ cd OCR_P2 <br/>
+        
+Installation des packages nécessaires (requests, lxml, BeautifulSoup4 = bs4)<br/>
+
+        $ pip install -r requirements.txt <br/>
+        
+Exécution du Programme via le fichier principal : main.py<br/>
+
+        $ python3 main.py <br/>
 
 ### Pour windows replacer [nom_de_votre_environnement_virtuel]/bin/ PAR  [nom_de_votre_environnement_virtuel]\Scripts\activate)
 
