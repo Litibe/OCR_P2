@@ -41,20 +41,20 @@ $ python3 main.py <br/>
 ## Lancement du programme : 
 Le programme d'un interface dans le terminal pour laisser à l'utilisateur le choix dans son extraction : <br/>
 """
-Lancement du script scraping pour http://books.toscrape.com/<br/>
+        Lancement du script scraping pour http://books.toscrape.com/
 
-        Sommaire : <br/>
-            11 => Extraction de tous les livres de toutes les catégories + Tableaux CSV + Dossier JPG<br/>
-            12 => Extraction de tous les livres de toutes les catégories + Tableaux CSV <br/>
-            13 => Extraction de tous les livres de toutes les catégories + Dossier JPG <br/>
-            <br/>
-            21 => Extraction Livres d'une catégories + Tableau CSV + Dossier JPG<br/>
-            22 => Extraction Livres d'une catégories + Tableau CSV <br/>
-            23 => Extraction Livres d'une catégories + Dossier JPG<br/>
-            <br/>
-            0 => Sortie du programme<br/>
-        <br/>
-Que souhaitez vous faire : <br/>
+        Sommaire : 
+            11 => Extraction de tous les livres de toutes les catégories + Tableaux CSV + Dossier JPG
+            12 => Extraction de tous les livres de toutes les catégories + Tableaux CSV
+            13 => Extraction de tous les livres de toutes les catégories + Dossier JPG 
+            
+            21 => Extraction Livres d'une catégories + Tableau CSV + Dossier JPG
+            22 => Extraction Livres d'une catégories + Tableau CSV 
+            23 => Extraction Livres d'une catégories + Dossier JPG
+            
+            0 => Sortie du programme
+        
+        Que souhaitez vous faire : 
 """
  <br/>
 Le programme laisse le choix à l'utilisateur, d'extraire tout ou une partie des livres présents dans une catégorie, depuis le site. <br/>
