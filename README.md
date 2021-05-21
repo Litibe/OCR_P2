@@ -36,15 +36,15 @@ récupération des fichiers sources du script depuis dépot GitHub<br/>
 
 Aller dans le dossier OCR_P2 contenant les fichiers<br/>
 
-        $ cd OCR_P2 <br/>
+        $ cd OCR_P2 
         
 Installation des packages nécessaires (requests, lxml, BeautifulSoup4 = bs4)<br/>
 
-        $ pip install -r requirements.txt <br/>
+        $ pip install -r requirements.txt 
         
 Exécution du Programme via le fichier principal : main.py<br/>
 
-        $ python3 main.py <br/>
+        $ python3 main.py 
 
 ### Pour windows replacer [nom_de_votre_environnement_virtuel]/bin/ PAR  [nom_de_votre_environnement_virtuel]\Scripts\activate)
 
