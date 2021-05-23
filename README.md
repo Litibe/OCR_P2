@@ -78,4 +78,9 @@ Le programme dispose de la fonctionnalité d'enregistrer des images de couvertur
  
  !! ATTENTION, à chaque lancement du programme, ce dernier efface les résultats d'extractions obtenus précédement (= reset). Par contre, tant que le script est ouvert, on peut additionner le résultat de ses extractions (exemple : on peut extraire plusieurs catégories de livres, qui seront regroupés dans le même dossier "résultat_extraction")
 
-## 
+## BONUS : Extraction des informations d'un seul livre : 
+Vous pouvez extraire manuellement les informations d'un seul livre en exécutant un fichier précis au lieu du main.py principal : 
+Exécution du Fichier : extract_info_book.py présent dans le dossier scripts_for_BeautifulSoup <br/>
+
+        $ python3 scripts_for_BeautifulSoup/extract_info_book.py
+
