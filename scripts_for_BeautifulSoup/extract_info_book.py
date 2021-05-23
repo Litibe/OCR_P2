@@ -55,8 +55,10 @@ def extract_info_book(Website, product_page_url):
 
 if __name__ == "__main__" :
     Website = "http://books.toscrape.com/"
-    # exemple url livre : "http://books.toscrape.com/catalogue/sharp-objects_997/index.html"
-    #input_url = str(input("Merci de saisir l'url du livre dont vous souhaitez extraire les informations : "))
+    print("Exécution du script pour les renseignement d'un seul livre")
+    print("\t exemple url livre : http://books.toscrape.com/catalogue/sharp-objects_997/index.html ")
+    input_url = str(input("Merci de saisir l'url du livre dont vous souhaitez extraire les informations : "))
+
     product_page_url, universal_product_code, title, price_including_tax, price_excluding_tax, number_available, product_description, category, review_rating, image_url = extract_info_book(Website,"http://books.toscrape.com/catalogue/sharp-objects_997/index.html")
     print("\nproduct_page_url : " + product_page_url)
     print("universal_product_code : " + universal_product_code)

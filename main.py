@@ -62,7 +62,7 @@ def extract_all(WEBSITE,launch_csv, launch_img):
             if launch_csv == True :
                 save_in_csv_file(files_csv_folder, category, data_to_write_for_csv)
 
-            print("Etat de l'extraction : ", str(round(i / 49*100, 1)) + "%")
+            print(f"Etat de l'extraction : {i} catégorie(s) sur 50 extraite(s) ")
             i += 1
 
         print("fin du programme")
