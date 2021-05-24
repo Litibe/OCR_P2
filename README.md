@@ -40,7 +40,7 @@ création de l'environnement virtuel<br/>
 
 activation de l'environnement virtuel <br/>
 
-        $ source [nom_de_votre_environnement_virtuel]\Scripts\activate
+        $ source .\[nom_de_votre_environnement_virtuel]\Scripts\activate
         
 Clonage Repository depuis dépot GitHub<br/>
 
