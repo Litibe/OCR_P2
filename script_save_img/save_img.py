@@ -7,3 +7,7 @@ def save_img_in_folder(img_by_categories_folder, category, image_url, universal_
     if not os.path.exists(category_folder):
         os.makedirs(category_folder)
     urllib.request.urlretrieve(image_url, category_folder + "/" + universal_product_code + ".jpg")
+
+
+if __name__ == "__main__" :
+    print("Merci d'exécuter le fichier Main.py directement, présent à la racine du dossier")

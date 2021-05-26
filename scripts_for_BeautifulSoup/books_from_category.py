@@ -38,5 +38,4 @@ def extract_books_from_category(url):
 
 
 if __name__ == "__main__" :
-    url_books = extract_books_from_category("http://books.toscrape.com/catalogue/category/books/mystery_3/index.html")
-    print(url_books)
+    print("Merci d'exécuter le fichier Main.py directement, présent à la racine du dossier")

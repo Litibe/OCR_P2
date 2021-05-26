@@ -24,3 +24,7 @@ def extract_categories_books(Website):
                 title = title[2].strip("  ")
             categoriesBook[title] = link
         return categoriesBook
+
+
+if __name__ == "__main__" :
+    print("Merci d'exécuter le fichier Main.py directement, présent à la racine du dossier")
